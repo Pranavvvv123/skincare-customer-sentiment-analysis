@@ -1,37 +1,92 @@
+
 # Skincare Customer Sentiment and Review Theme Analysis
 
-## Project overview
-This beginner-friendly project proposes a data science workflow for analysing online skincare reviews. The goal is to explore ratings and review text to understand customer feedback.
+## Project Overview
+This project analyses customer reviews of skincare products using Python. It aims to understand customer satisfaction, ratings, and feedback through exploratory data analysis.
 
-**Status:** Starter prototype. `sample_reviews.csv` contains fictional demonstration data only, not real customer reviews. Do not use it to make claims about actual products or customers.
+**Status:** Updated prototype using a real Sephora customer review dataset.
 
-## Business problem
-Star ratings show how a customer rated a product, but do not fully explain why. This project will explore ratings and written reviews to identify common themes such as texture, packaging, price, and perceived results.
+## Business Problem
+Star ratings show how customers rate skincare products, but they do not fully explain why customers like or dislike them. This project explores ratings and written reviews to identify customer opinions and common feedback patterns.
 
-## Research questions
-1. What is the rating distribution?
-2. Which themes appear in positive and negative reviews?
-3. Do star ratings agree with sentiment expressed in review text?
-4. What further analysis is possible with a properly sourced dataset?
+## Research Questions
+1. What is the distribution of customer ratings?
+2. Which brands receive the most reviews?
+3. What are the most common words in customer reviews?
+4. What proportion of reviews are positive, neutral, and negative based on ratings?
+5. What patterns can be identified from customer feedback?
 
-## Files
-- `analysis.py`: starter exploratory analysis
-- `sample_reviews.csv`: fictional demo data
-- `requirements.txt`: required Python libraries
+## Dataset
+The project uses a 10,000-review sample from the Sephora Products and Skincare Reviews dataset.
 
-## Run the project
-Install Python 3.10+, open a terminal in this folder, then run:
+**Dataset file:** `sephora_skincare_reviews_sample.csv`
+
+### Important Features
+- `review_text`: Written customer feedback
+- `rating`: Product rating
+- `is_recommended`: Recommendation status
+- `submission_time`: Review date
+- `skin_type`: Customer skin type
+- `product_name`: Product name
+- `brand_name`: Brand name
+
+## Technologies Used
+- Python
+- Pandas
+- NumPy
+- Matplotlib
+- Scikit-learn
+
+## Analysis Performed
+- Dataset overview
+- Missing value analysis
+- Duplicate review removal
+- Rating distribution
+- Rating-based sentiment classification
+- Brand-wise review analysis
+- Common word frequency
+- Data visualization
+
+## Sentiment Classification
+Sentiment is initially classified using customer ratings:
+- 4–5 stars: Positive
+- 3 stars: Neutral
+- 1–2 stars: Negative
+
+These are rating-based sentiment labels, not predictions from an AI text classifier.
+
+## Project Structure
+```text
+skincare-customer-sentiment-analysis/
+├── README.md
+├── analysis.py
+├── requirements.txt
+└── sephora_skincare_reviews_sample.csv
+```
+
+## How to Run
+Install the required libraries:
+
 ```bash
 pip install -r requirements.txt
+```
+
+Run the Python script:
+
+```bash
 python analysis.py
 ```
-The script prints basic summaries and saves two charts.
 
-## Next steps
-1. Find a public skincare/beauty review dataset and check its licence and terms.
-2. Replace the fictional demo data with permitted real data.
-3. Add data cleaning, text preprocessing, and review-theme analysis.
-4. Evaluate any sentiment classifier and document limitations.
+## Limitations and Ethics
+- The analysis uses a 10,000-review sample, not the complete dataset.
+- Rating-based sentiment may not always match the actual meaning of review text.
+- Customer reviews may contain personal opinions and biases.
+- Reviews are opinions and not clinical evidence of product safety or effectiveness.
+- Dataset usage must follow its applicable licence and terms.
 
-## Limitations and ethics
-Reviews may be biased and may not represent all buyers. Rating-derived sentiment is only a proxy. Reviews are opinions, not clinical evidence of safety or effectiveness. Use only data you are permitted to access and reuse, and do not publish personal information.
+## Future Scope
+- Advanced text preprocessing
+- Positive and negative review theme extraction
+- Text-based sentiment classification
+- Product-wise customer feedback comparison
+- Improved data visualizations

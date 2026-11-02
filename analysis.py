@@ -1,43 +1,99 @@
-"""Starter analysis. The included CSV contains fictional demo data only."""
-from pathlib import Path
+
 import pandas as pd
 import matplotlib.pyplot as plt
+import re
+from collections import Counter
 
-BASE_DIR = Path(__file__).resolve().parent
-df = pd.read_csv(BASE_DIR / "sample_reviews.csv")
+# Load the Sephora dataset
+df = pd.read_csv("sephora_skincare_reviews_sample.csv")
 
-print("Dataset preview:\n", df.head())
-print("\nRows and columns:", df.shape)
-print("\nMissing values:\n", df.isna().sum())
-print("\nRating summary:\n", df["rating"].describe())
-print("\nAverage rating by product:\n",
-      df.groupby("product_name")["rating"].mean().sort_values(ascending=False))
+print("SEPHORA CUSTOMER REVIEW ANALYSIS")
+print("--------------------------------")
 
-def rating_label(rating):
+# Basic dataset information
+print("\nDataset Shape:", df.shape)
+print("\nColumn Names:")
+print(df.columns.tolist())
+
+# Check missing values
+print("\nMissing Values:")
+print(df.isnull().sum())
+
+# Remove duplicate reviews
+df = df.drop_duplicates(subset=["review_text"])
+
+# Clean review text
+df["review_text"] = df["review_text"].fillna("").astype(str)
+df["review_text"] = df["review_text"].str.lower()
+df["review_text"] = df["review_text"].apply(
+    lambda x: re.sub(r"[^a-z\s]", " ", x)
+)
+df["review_text"] = df["review_text"].str.replace(
+    r"\s+", " ", regex=True
+).str.strip()
+
+# Rating analysis
+print("\nRating Statistics:")
+print(df["rating"].describe())
+
+print("\nRating Counts:")
+print(df["rating"].value_counts().sort_index())
+
+# Sentiment based on star ratings
+def get_sentiment(rating):
     if rating >= 4:
         return "Positive"
-    if rating == 3:
+    elif rating == 3:
         return "Neutral"
-    return "Negative"
+    else:
+        return "Negative"
 
-df["rating_sentiment"] = df["rating"].apply(rating_label)
-print("\nRating-derived sentiment counts:\n", df["rating_sentiment"].value_counts())
+df["sentiment"] = df["rating"].apply(get_sentiment)
 
-df["rating"].value_counts().sort_index().plot(kind="bar")
-plt.title("Rating Counts (Fictional Demo Data)")
-plt.xlabel("Star rating")
-plt.ylabel("Number of reviews")
+print("\nSentiment Distribution:")
+print(df["sentiment"].value_counts())
+
+# Top reviewed brands
+print("\nTop 10 Brands:")
+print(df["brand_name"].value_counts().head(10))
+
+# Plot rating distribution
+df["rating"].value_counts().sort_index().plot(
+    kind="bar", title="Customer Rating Distribution"
+)
+plt.xlabel("Rating")
+plt.ylabel("Number of Reviews")
 plt.tight_layout()
-plt.savefig(BASE_DIR / "rating_counts.png", dpi=150)
+plt.savefig("rating_distribution.png")
 plt.close()
 
-df["rating_sentiment"].value_counts().plot(kind="bar")
-plt.title("Rating-Derived Sentiment (Fictional Demo Data)")
-plt.xlabel("Sentiment label")
-plt.ylabel("Number of reviews")
+# Plot sentiment distribution
+df["sentiment"].value_counts().plot(
+    kind="bar", title="Customer Sentiment Distribution"
+)
+plt.xlabel("Sentiment")
+plt.ylabel("Number of Reviews")
 plt.tight_layout()
-plt.savefig(BASE_DIR / "sentiment_counts.png", dpi=150)
+plt.savefig("sentiment_distribution.png")
 plt.close()
 
-print("\nSaved rating_counts.png and sentiment_counts.png")
-print("Reminder: this is a starter workflow, not analysis of real customer data.")
+# Find common words in reviews
+all_words = " ".join(df["review_text"]).split()
+stop_words = {
+    "the", "and", "is", "it", "to", "of", "a", "in",
+    "for", "this", "that", "my", "with", "on", "was",
+    "but", "i", "have", "very", "as", "are", "be"
+}
+
+words = [
+    word for word in all_words
+    if len(word) > 2 and word not in stop_words
+]
+
+common_words = Counter(words).most_common(15)
+
+print("\nTop 15 Common Words:")
+for word, count in common_words:
+    print(word, ":", count)
+
+print("\nAnalysis completed successfully!")

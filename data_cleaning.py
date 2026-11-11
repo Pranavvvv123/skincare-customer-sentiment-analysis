@@ -53,19 +53,19 @@ def main():
     if missing_required:
         raise ValueError(f"Required columns missing: {missing_required}")
 
-    # Preserve a flag for missing review text; create a separate cleaned text field.
+    
     df["review_text_missing"] = (
         df["review_text"].isna()
         | (df["review_text"].astype("string").str.strip() == "")
     )
     df["review_text_clean"] = df["review_text"].apply(clean_text)
 
-    # Trim optional text fields; do not invent titles or product/brand names.
+    
     for col in ["review_title", "product_name", "brand_name"]:
         if col in df.columns:
             df[col] = df[col].astype("string").str.strip().replace("", pd.NA)
 
-    # Numeric conversion and domain validation.
+    
     numeric_cols = [
         "rating", "helpfulness", "total_feedback_count",
         "total_neg_feedback_count", "total_pos_feedback_count", "price_usd"
@@ -88,24 +88,24 @@ def main():
             negative_counts[col] = int(mask.sum())
             df.loc[mask, col] = np.nan
 
-    # Parse timestamps into an additional standardized column.
+    
     date_parse_failures = 0
     if "submission_time" in df.columns:
         parsed = pd.to_datetime(df["submission_time"], errors="coerce", utc=True)
         date_parse_failures = int(parsed.isna().sum())
         df["submission_time_clean"] = parsed
 
-    # Keep optional profile values explicitly unknown for categorical analysis.
+    
     for col in ["skin_tone", "eye_color", "skin_type", "hair_color"]:
         if col in df.columns:
             df[col] = df[col].astype("string").str.strip().replace("", pd.NA)
             df[col] = df[col].fillna("Unknown")
 
-    # Remove exact full-row duplicates only. Similar text alone is not proof of duplication.
+    
     exact_duplicates = int(df.duplicated().sum())
     df = df.drop_duplicates().copy()
 
-    # This is a rating-derived proxy label, not text-based AI sentiment.
+    
     df["rating_sentiment"] = df["rating"].apply(rating_to_sentiment)
 
     df.to_csv(OUTPUT_FILE, index=False)

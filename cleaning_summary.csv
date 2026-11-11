@@ -1,0 +1,28 @@
+metric,column,before,after,notes
+missing_values,author_id,0,0,After field-specific processing; Unknown labels are not counted as null.
+missing_values,rating,0,0,After field-specific processing; Unknown labels are not counted as null.
+missing_values,is_recommended,392,392,After field-specific processing; Unknown labels are not counted as null.
+missing_values,helpfulness,3381,3381,After field-specific processing; Unknown labels are not counted as null.
+missing_values,total_feedback_count,0,0,After field-specific processing; Unknown labels are not counted as null.
+missing_values,total_neg_feedback_count,0,0,After field-specific processing; Unknown labels are not counted as null.
+missing_values,total_pos_feedback_count,0,0,After field-specific processing; Unknown labels are not counted as null.
+missing_values,submission_time,0,0,After field-specific processing; Unknown labels are not counted as null.
+missing_values,review_text,4,4,After field-specific processing; Unknown labels are not counted as null.
+missing_values,review_title,3055,3055,After field-specific processing; Unknown labels are not counted as null.
+missing_values,skin_tone,953,0,After field-specific processing; Unknown labels are not counted as null.
+missing_values,eye_color,920,0,After field-specific processing; Unknown labels are not counted as null.
+missing_values,skin_type,505,0,After field-specific processing; Unknown labels are not counted as null.
+missing_values,hair_color,1204,0,After field-specific processing; Unknown labels are not counted as null.
+missing_values,product_id,0,0,After field-specific processing; Unknown labels are not counted as null.
+missing_values,product_name,0,0,After field-specific processing; Unknown labels are not counted as null.
+missing_values,brand_name,0,0,After field-specific processing; Unknown labels are not counted as null.
+missing_values,price_usd,0,0,After field-specific processing; Unknown labels are not counted as null.
+dataset_rows,all,10000,10000,Rows after exact duplicate removal.
+dataset_columns,all,18,22,New processed fields may increase column count.
+exact_duplicate_rows,all,0,0,Exact duplicate rows removed.
+invalid_rating_values,rating,0,0,Out-of-range ratings changed to missing; inspect before modelling.
+date_parse_failures,submission_time,0,0,Unparseable dates are NaT in submission_time_clean.
+negative_values_flagged,total_feedback_count,0,0,Negative values changed to missing; review source if count > 0.
+negative_values_flagged,total_neg_feedback_count,0,0,Negative values changed to missing; review source if count > 0.
+negative_values_flagged,total_pos_feedback_count,0,0,Negative values changed to missing; review source if count > 0.
+negative_values_flagged,price_usd,0,0,Negative values changed to missing; review source if count > 0.

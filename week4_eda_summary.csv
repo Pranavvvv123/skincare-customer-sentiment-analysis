@@ -1,0 +1,8 @@
+metric,value
+input_file,sephora_skincare_reviews_sample.csv
+rows,10000
+columns_after_feature_engineering,26
+exact_duplicate_rows,0
+mean_rating,4.0856
+median_rating,5.0
+rating_missing,0

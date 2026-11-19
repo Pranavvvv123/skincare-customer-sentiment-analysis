@@ -43,6 +43,8 @@ The sample contains 10,000 records and 18 columns.
 - NumPy
 - Matplotlib
 - Scikit-learn
+- Seaborn
+- SciPy
 
 ## Analysis Performed
 
@@ -150,3 +152,47 @@ Make sure the original sample dataset is present in the project folder before ru
 ## Project Goal
 
 The overall goal is to understand skincare customer feedback through data analysis and preprocessing, and to build a foundation for more advanced sentiment analysis and review theme identification.
+
+## Week 4: Exploratory Data Analysis and Feature Engineering
+
+This stage focuses on planning Exploratory Data Analysis (EDA) and feature engineering using the preprocessed Sephora skincare reviews dataset.
+
+### EDA Plan
+
+The planned analysis includes:
+
+- Univariate analysis of customer ratings, review length and product categories.
+- Bivariate analysis of ratings, recommendation status and customer skin types.
+- Multivariate analysis to explore relationships between customer feedback variables.
+- Brand-wise rating and review comparisons.
+- Review text exploration to identify frequently occurring words and feedback patterns.
+- Time-based analysis using review submission dates.
+- Statistical summaries, correlation analysis and data visualizations.
+
+### Feature Engineering Plan
+
+Potential new features include:
+
+- Review word count and character count.
+- Rating-based sentiment categories.
+- Review month and year.
+- Standardized skin type categories.
+- Recommendation indicators.
+- Transformed helpfulness values.
+- Encoded categorical variables.
+- Normalized numerical features.
+
+### Technologies and Libraries
+
+- Pandas – Data manipulation and analysis.
+- NumPy – Numerical operations.
+- Matplotlib – Data visualization.
+- Seaborn – Statistical visualizations.
+- SciPy – Statistical analysis.
+- Scikit-learn – Feature encoding, scaling and future machine learning preparation.
+
+### Expected Benefits
+
+The EDA and feature engineering workflow aims to identify customer satisfaction patterns, understand skincare product feedback, compare brand performance and discover useful customer behaviour trends. The engineered features may also support future sentiment analysis and machine learning models.
+
+**Note:** This section describes the planned Week 4 workflow. Actual findings, charts and implemented features will be added after the analysis is performed.

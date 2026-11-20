@@ -1,0 +1,2 @@
+source_file,original_rows,rows_with_valid_target,rows_missing_or_invalid_target,recommended_count,not_recommended_count,train_rows,test_rows,positive_rate,features_used,excluded_features,random_state
+sephora_skincare_reviews_cleaned.csv,10000,9608,392,7514,2094,7686,1922,0.7820566194837635,"['review_text_clean', 'skin_type', 'brand_name', 'price_usd']","['rating', 'rating_sentiment', 'helpfulness', 'total_feedback_count', 'total_neg_feedback_count', 'total_pos_feedback_count', 'author_id', 'product_id', 'submission_time']",42
